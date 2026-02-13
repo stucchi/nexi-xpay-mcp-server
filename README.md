@@ -1,4 +1,4 @@
-# nexi-mcp
+# nexi-xpay-mcp-server
 
 [![MCP](https://badge.mcpx.dev/default)](https://modelcontextprotocol.io)
 [![PyPI](https://img.shields.io/pypi/v/nexi-xpay-mcp-server)](https://pypi.org/project/nexi-xpay-mcp-server/)
@@ -23,29 +23,9 @@ Server MCP per le API **Back Office di Nexi XPay**. Permette agli assistenti AI 
 
 ## Installazione
 
-### Con Claude Code
+### Con Claude Code / Claude Desktop
 
-Aggiungi al tuo `.mcp.json`:
-
-```json
-{
-  "mcpServers": {
-    "nexi": {
-      "type": "stdio",
-      "command": "uvx",
-      "args": ["nexi-xpay-mcp-server"],
-      "env": {
-        "NEXI_ALIAS": "tuo_alias",
-        "NEXI_SECRET_KEY": "tua_secret_key",
-      }
-    }
-  }
-}
-```
-
-### Con Claude Desktop
-
-Aggiungi alla configurazione di Claude Desktop (`~/Library/Application Support/Claude/claude_desktop_config.json` su macOS):
+Aggiungi al tuo file di configurazione MCP (`.mcp.json` per Claude Code, `claude_desktop_config.json` per Claude Desktop):
 
 ```json
 {
@@ -55,7 +35,7 @@ Aggiungi alla configurazione di Claude Desktop (`~/Library/Application Support/C
       "args": ["nexi-xpay-mcp-server"],
       "env": {
         "NEXI_ALIAS": "tuo_alias",
-        "NEXI_SECRET_KEY": "tua_secret_key",
+        "NEXI_SECRET_KEY": "tua_secret_key"
       }
     }
   }
@@ -101,7 +81,7 @@ Usa chiavi diverse per eseguire un'istanza per merchant:
 
 ```bash
 git clone https://github.com/stucchi/nexi-xpay-mcp-server.git
-cd nexi-mcp-server
+cd nexi-xpay-mcp-server
 uv sync
 ```
 
