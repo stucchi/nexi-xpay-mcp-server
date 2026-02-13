@@ -6,6 +6,7 @@ from typing import Annotated, Any
 from mcp.server.fastmcp import FastMCP
 
 from nexi_mcp.config import get_config
+from nexi_mcp.date_parser import parse_periodo
 from nexi_mcp.tools.dettaglio_ordine import dettaglio_ordine as _dettaglio_ordine
 from nexi_mcp.tools.elenco_ordini import elenco_ordini as _elenco_ordini
 from nexi_mcp.tools.metodi_pagamento import metodi_pagamento as _metodi_pagamento
@@ -21,14 +22,19 @@ def _format(result: dict[str, Any]) -> str:
 
 @mcp.tool()
 async def elenco_ordini(
-    periodo: Annotated[str, 'Intervallo date nel formato "gg/mm/aaaa - gg/mm/aaaa" (max 90 giorni)'],
+    periodo: Annotated[
+        str,
+        'Periodo di ricerca. Formato esatto: "gg/mm/aaaa - gg/mm/aaaa" (es. "01/01/2026 - 31/01/2026"). '
+        'Accetta anche espressioni naturali: "oggi", "ieri", "ultima settimana", "ultimo mese", '
+        '"ultimi N giorni", "ultimi N mesi" (max 90 giorni).',
+    ],
     canale: Annotated[str, "Canale di pagamento"] = "All",
     codiceTransazione: Annotated[str, "Filtro per transazione specifica"] = "",
     stato: Annotated[list[str] | None, "Array di stati da filtrare"] = None,
 ) -> str:
     """Recupera l'elenco degli ordini dal Back Office Nexi XPay. Supporta filtri per periodo, canale, stato e codice transazione."""
     result = await _elenco_ordini(
-        periodo=periodo,
+        periodo=parse_periodo(periodo),
         canale=canale,
         codice_transazione=codiceTransazione,
         stato=stato,

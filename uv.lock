@@ -362,7 +362,7 @@ wheels = [
 ]
 
 [[package]]
-name = "nexi-mcp"
+name = "nexi-xpay-mcp-server"
 version = "1.0.0"
 source = { editable = "." }
 dependencies = [
