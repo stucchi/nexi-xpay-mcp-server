@@ -3,7 +3,7 @@ requires = ["setuptools>=75.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "nexi-mcp"
+name = "nexi-xpay-mcp-server"
 version = "1.0.0"
 description = "Server MCP per le API Back Office di Nexi XPay"
 readme = "README.md"
@@ -16,7 +16,6 @@ keywords = ["mcp", "nexi", "xpay", "payments", "back-office"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
-    "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
@@ -35,7 +34,7 @@ Repository = "https://github.com/stucchi/nexi-xpay-mcp-server"
 Issues = "https://github.com/stucchi/nexi-xpay-mcp-server/issues"
 
 [project.scripts]
-nexi-mcp = "nexi_mcp.server:main"
+nexi-xpay-mcp-server = "nexi_mcp.server:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

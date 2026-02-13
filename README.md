@@ -1,7 +1,7 @@
 # nexi-mcp
 
 [![MCP](https://badge.mcpx.dev/default)](https://modelcontextprotocol.io)
-[![PyPI](https://img.shields.io/pypi/v/nexi-mcp)](https://pypi.org/project/nexi-mcp/)
+[![PyPI](https://img.shields.io/pypi/v/nexi-xpay-mcp-server)](https://pypi.org/project/nexi-xpay-mcp-server/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Server MCP per le API **Back Office di Nexi XPay**. Permette agli assistenti AI (Claude, Cursor, ecc.) di consultare ordini, dettagli transazioni, warning e metodi di pagamento del tuo account merchant Nexi XPay.
@@ -33,7 +33,7 @@ Aggiungi al tuo `.mcp.json`:
     "nexi": {
       "type": "stdio",
       "command": "uvx",
-      "args": ["nexi-mcp"],
+      "args": ["nexi-xpay-mcp-server"],
       "env": {
         "NEXI_ALIAS": "tuo_alias",
         "NEXI_SECRET_KEY": "tua_secret_key",
@@ -52,7 +52,7 @@ Aggiungi alla configurazione di Claude Desktop (`~/Library/Application Support/C
   "mcpServers": {
     "nexi": {
       "command": "uvx",
-      "args": ["nexi-mcp"],
+      "args": ["nexi-xpay-mcp-server"],
       "env": {
         "NEXI_ALIAS": "tuo_alias",
         "NEXI_SECRET_KEY": "tua_secret_key",
@@ -71,7 +71,7 @@ Usa chiavi diverse per eseguire un'istanza per merchant:
   "mcpServers": {
     "nexi-acme": {
       "command": "uvx",
-      "args": ["nexi-mcp"],
+      "args": ["nexi-xpay-mcp-server"],
       "env": {
         "NEXI_ALIAS": "acme_merchant",
         "NEXI_SECRET_KEY": "acme_secret_key",
@@ -79,7 +79,7 @@ Usa chiavi diverse per eseguire un'istanza per merchant:
     },
     "nexi-globex": {
       "command": "uvx",
-      "args": ["nexi-mcp"],
+      "args": ["nexi-xpay-mcp-server"],
       "env": {
         "NEXI_ALIAS": "globex_merchant",
         "NEXI_SECRET_KEY": "globex_secret_key",
@@ -108,7 +108,7 @@ uv sync
 Esecuzione locale:
 
 ```bash
-NEXI_ALIAS=tuo_alias NEXI_SECRET_KEY=tua_secret uv run nexi-mcp
+NEXI_ALIAS=tuo_alias NEXI_SECRET_KEY=tua_secret uv run nexi-xpay-mcp-server
 ```
 
 ## Licenza
