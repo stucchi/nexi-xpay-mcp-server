@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "nexi-xpay-mcp-server"
-version = "1.1.1"
-description = "Server MCP per le API Back Office di Nexi XPay"
+version = "1.2.0"
+description = "MCP server for Nexi XPay Back Office APIs"
 readme = "README.md"
 license = "MIT"
 requires-python = ">=3.10"

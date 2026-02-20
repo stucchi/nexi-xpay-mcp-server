@@ -4,28 +4,32 @@
 [![PyPI](https://img.shields.io/pypi/v/nexi-xpay-mcp-server)](https://pypi.org/project/nexi-xpay-mcp-server/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Server MCP per le API **Back Office di Nexi XPay**. Permette agli assistenti AI (Claude, Cursor, ecc.) di consultare ordini, dettagli transazioni, warning e metodi di pagamento del tuo account merchant Nexi XPay.
+MCP server for the **Nexi XPay Back Office APIs**. Enables AI assistants (Claude, Cursor, etc.) to query orders, transaction details, warnings/anomalies, and payment methods from your Nexi XPay merchant account.
 
-## Strumenti
+## Tools
 
-| Strumento | Descrizione |
-|-----------|-------------|
-| `elenco_ordini` | Elenco ordini con filtri (intervallo date, canale, stato, codice transazione) |
-| `dettaglio_ordine` | Dettaglio completo di una transazione specifica |
-| `warning` | Recupera warning/anomalie (default: ultimi 7 giorni) |
-| `metodi_pagamento` | Elenco metodi di pagamento attivi per il merchant |
+| Tool | Description |
+|------|-------------|
+| `list_orders` | List orders with filters (date range, channel, status, transaction code) |
+| `order_details` | Full details of a specific transaction |
+| `warnings` | Retrieve warnings/anomalies (default: last 7 days) |
+| `payment_methods` | List active payment methods for the merchant |
 
-## Prerequisiti
+## Prerequisites
 
 - Python >= 3.10
-- Un account merchant Nexi XPay con accesso alle API Back Office
-- Le credenziali API: **Alias**, **API Key** e **Secret Key** (dal Back Office Nexi)
+- A Nexi XPay merchant account with Back Office API access
+- API credentials: **Alias**, **API Key** and **Secret Key** (from Nexi Back Office)
 
-## Installazione
+## Installation
 
-### Con Claude Code / Claude Desktop
+```bash
+uvx nexi-xpay-mcp-server
+```
 
-Aggiungi al tuo file di configurazione MCP (`.mcp.json` per Claude Code, `claude_desktop_config.json` per Claude Desktop):
+## Usage in .mcp.json
+
+Add to your MCP configuration file (`.mcp.json` for Claude Code, `claude_desktop_config.json` for Claude Desktop):
 
 ```json
 {
@@ -34,17 +38,17 @@ Aggiungi al tuo file di configurazione MCP (`.mcp.json` per Claude Code, `claude
       "command": "uvx",
       "args": ["nexi-xpay-mcp-server"],
       "env": {
-        "NEXI_ALIAS": "tuo_alias",
-        "NEXI_SECRET_KEY": "tua_secret_key"
+        "NEXI_ALIAS": "your_alias",
+        "NEXI_SECRET_KEY": "your_secret_key"
       }
     }
   }
 }
 ```
 
-### Più merchant
+### Multiple merchants
 
-Usa chiavi diverse per eseguire un'istanza per merchant:
+Use different keys to run one instance per merchant:
 
 ```json
 {
@@ -54,7 +58,7 @@ Usa chiavi diverse per eseguire un'istanza per merchant:
       "args": ["nexi-xpay-mcp-server"],
       "env": {
         "NEXI_ALIAS": "acme_merchant",
-        "NEXI_SECRET_KEY": "acme_secret_key",
+        "NEXI_SECRET_KEY": "acme_secret_key"
       }
     },
     "nexi-globex": {
@@ -62,22 +66,22 @@ Usa chiavi diverse per eseguire un'istanza per merchant:
       "args": ["nexi-xpay-mcp-server"],
       "env": {
         "NEXI_ALIAS": "globex_merchant",
-        "NEXI_SECRET_KEY": "globex_secret_key",
+        "NEXI_SECRET_KEY": "globex_secret_key"
       }
     }
   }
 }
 ```
 
-## Variabili d'ambiente
+## Environment variables
 
-| Variabile | Obbligatoria | Default | Descrizione |
-|-----------|:------------:|---------|-------------|
-| `NEXI_ALIAS` | Sì | — | Alias del merchant (usato anche come API key) |
-| `NEXI_SECRET_KEY` | Sì | — | Chiave segreta per il calcolo del MAC |
-| `NEXI_TEST` | No | `false` | `true` per usare l'ambiente di test |
+| Variable | Required | Default | Description |
+|----------|:--------:|---------|-------------|
+| `NEXI_ALIAS` | Yes | — | Merchant alias (also used as API key) |
+| `NEXI_SECRET_KEY` | Yes | — | Secret key for MAC calculation |
+| `NEXI_TEST` | No | `false` | Set to `true` to use the test environment |
 
-## Sviluppo
+## Development
 
 ```bash
 git clone https://github.com/stucchi/nexi-xpay-mcp-server.git
@@ -85,12 +89,14 @@ cd nexi-xpay-mcp-server
 uv sync
 ```
 
-Esecuzione locale:
+Local run:
 
 ```bash
-NEXI_ALIAS=tuo_alias NEXI_SECRET_KEY=tua_secret uv run nexi-xpay-mcp-server
+NEXI_ALIAS=your_alias NEXI_SECRET_KEY=your_secret uv run nexi-xpay-mcp-server
 ```
 
-## Licenza
+## License
 
 MIT
+
+<!-- mcp-name: io.github.stucchi/nexi-xpay -->

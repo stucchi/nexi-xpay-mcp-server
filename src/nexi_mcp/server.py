@@ -21,18 +21,18 @@ def _format(result: dict[str, Any]) -> str:
 
 
 @mcp.tool()
-async def elenco_ordini(
+async def list_orders(
     periodo: Annotated[
         str,
-        'Periodo di ricerca. Formato esatto: "gg/mm/aaaa - gg/mm/aaaa" (es. "01/01/2026 - 31/01/2026"). '
-        'Accetta anche espressioni naturali: "oggi", "ieri", "ultima settimana", "ultimo mese", '
-        '"ultimi N giorni", "ultimi N mesi" (max 90 giorni).',
+        'Search period. Exact format: "dd/mm/yyyy - dd/mm/yyyy" (e.g. "01/01/2026 - 31/01/2026"). '
+        'Also accepts natural expressions: "today", "yesterday", "last week", "last month", '
+        '"last N days", "last N months" (max 90 days).',
     ],
-    canale: Annotated[str, "Canale di pagamento"] = "All",
-    codiceTransazione: Annotated[str, "Filtro per transazione specifica"] = "",
-    stato: Annotated[list[str] | None, "Array di stati da filtrare"] = None,
+    canale: Annotated[str, "Payment channel"] = "All",
+    codiceTransazione: Annotated[str, "Filter by specific transaction code"] = "",
+    stato: Annotated[list[str] | None, "Array of statuses to filter"] = None,
 ) -> str:
-    """Recupera l'elenco degli ordini dal Back Office Nexi XPay. Supporta filtri per periodo, canale, stato e codice transazione."""
+    """Retrieve the list of orders from Nexi XPay Back Office. Supports filters by period, channel, status, and transaction code."""
     result = await _elenco_ordini(
         periodo=parse_periodo(periodo),
         canale=canale,
@@ -43,21 +43,21 @@ async def elenco_ordini(
 
 
 @mcp.tool()
-async def dettaglio_ordine(
-    codiceTransazione: Annotated[str, "Identificativo della transazione merchant"],
+async def order_details(
+    codiceTransazione: Annotated[str, "Merchant transaction identifier"],
 ) -> str:
-    """Recupera i dettagli di un ordine specifico dal Back Office Nexi XPay utilizzando il codice transazione."""
+    """Retrieve full details of a specific order from Nexi XPay Back Office by transaction code."""
     result = await _dettaglio_ordine(codice_transazione=codiceTransazione)
     return _format(result)
 
 
 @mcp.tool()
-async def warning(
-    codiceTransazione: Annotated[str | None, "Identificativo della transazione"] = None,
-    dataTransazioneDal: Annotated[str | None, 'Data di inizio nel formato "gg/mm/aaaa hh:mm:ss"'] = None,
-    dataTransazioneAl: Annotated[str | None, 'Data di fine nel formato "gg/mm/aaaa hh:mm:ss"'] = None,
+async def warnings(
+    codiceTransazione: Annotated[str | None, "Transaction identifier"] = None,
+    dataTransazioneDal: Annotated[str | None, 'Start date in "dd/mm/yyyy hh:mm:ss" format'] = None,
+    dataTransazioneAl: Annotated[str | None, 'End date in "dd/mm/yyyy hh:mm:ss" format'] = None,
 ) -> str:
-    """Recupera i warning/anomalie dal Back Office Nexi XPay. È possibile filtrare per codice transazione o intervallo di date."""
+    """Retrieve warnings/anomalies from Nexi XPay Back Office. Can filter by transaction code or date range."""
     result = await _warning(
         codice_transazione=codiceTransazione,
         data_transazione_dal=dataTransazioneDal,
@@ -67,12 +67,12 @@ async def warning(
 
 
 @mcp.tool()
-async def metodi_pagamento(
-    platform: Annotated[str, "Nome del CMS (default: custom)"] = "custom",
-    platformVers: Annotated[str, "Versione del CMS (default: 0)"] = "0",
-    pluginVers: Annotated[str, "Versione del plugin (default: 0)"] = "0",
+async def payment_methods(
+    platform: Annotated[str, "CMS name (default: custom)"] = "custom",
+    platformVers: Annotated[str, "CMS version (default: 0)"] = "0",
+    pluginVers: Annotated[str, "Plugin version (default: 0)"] = "0",
 ) -> str:
-    """Recupera i metodi di pagamento attivi per un merchant dal Back Office Nexi XPay."""
+    """Retrieve active payment methods for a merchant from Nexi XPay Back Office."""
     result = await _metodi_pagamento(
         platform=platform,
         platform_vers=platformVers,
