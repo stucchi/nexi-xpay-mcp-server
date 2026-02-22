@@ -7,12 +7,19 @@
     "url": "https://github.com/stucchi/nexi-xpay-mcp-server",
     "source": "github"
   },
-  "version": "1.2.0",
+  "version": "1.2.1",
+  "icons": [
+    {
+      "src": "https://raw.githubusercontent.com/stucchi/nexi-xpay-mcp-server/master/assets/icon.png",
+      "mimeType": "image/png",
+      "sizes": ["1024x1024"]
+    }
+  ],
   "packages": [
     {
       "registryType": "pypi",
       "identifier": "nexi-xpay-mcp-server",
-      "version": "1.2.0",
+      "version": "1.2.1",
       "transport": {
         "type": "stdio"
       }
